@@ -1,3 +1,4 @@
+/*
 Node n1 = new Node(width/2, height/2, 50);
 
 void setup(){
@@ -9,3 +10,4 @@ void draw(){
  n1.createNode();
  n1.dragNode();
 }
+*/

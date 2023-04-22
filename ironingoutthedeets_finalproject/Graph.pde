@@ -93,3 +93,4 @@ class Graph {
   ArrayList<Vertex> get_vertices() {
     return vertices;
   }
+}

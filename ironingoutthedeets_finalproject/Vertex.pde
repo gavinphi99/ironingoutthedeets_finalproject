@@ -14,8 +14,9 @@ class Vertex {
   String get_label() {
     return label;
   }
-
+  /*
   String toString() {
     return str(label);
   }
+  */
 }
