@@ -29,3 +29,37 @@ class Stack{
     return this.stack.size();
   }
 }
+
+class Queue{
+  ArrayList<Node> queue;
+  
+  Queue(){
+    this.queue = new ArrayList<Node>();
+  }
+
+  // add an item to the end of the queue
+  void enqueue(Node item){
+    this.queue.add(item);
+  }
+
+  // remove an item from the beginning of the queue
+  Node dequeue(){
+    Node placeHolder = this.peek();
+    this.queue.remove(0);
+    return placeHolder;
+  }
+
+  // checks the item at the top of the Queue
+  Node peek(){
+    return this.queue.get(0);
+  }
+
+  //check if the queue if empty
+  boolean is_empty(){
+    return this.queue.size() == 0;
+  }
+  //return the number of elements in the queue
+  int size(){
+    return this.queue.size();
+  }
+}
