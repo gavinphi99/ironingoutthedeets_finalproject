@@ -5,7 +5,7 @@ SDrop drop;
 
 void setup() {
   size(400, 400);
-  n1 = new Node(width/2, height/2, 50);
+  n1 = new Node("Test", width/2, height/2, 50);
   drop = new SDrop(this);
 }
 

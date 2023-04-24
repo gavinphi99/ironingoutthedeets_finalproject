@@ -1,9 +1,9 @@
 class Graph {
-  ArrayList<Vertex> vertices;
+  ArrayList<Node> vertices;
   int[][] adjMat;
 
   Graph() {
-    vertices = new ArrayList<Vertex>();
+    vertices = new ArrayList<Node>();
     adjMat = new int[0][0];
   }
 

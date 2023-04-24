@@ -1,11 +1,22 @@
 class Node{
   float x,y,r;
-  Node(float x, float y, float r){
+  String label;
+  boolean visited;
+  Node(String label, float x, float y, float r){
     this.x = x;
     this.y = y;
     this.r = r;
+    this.label = label;
+    this.visited = false;
   }
-  
+
+  boolean was_visited() {
+    return visited;
+  }
+
+  String get_label() {
+    return label;
+  }
   
   void createNode(){
    noStroke();
