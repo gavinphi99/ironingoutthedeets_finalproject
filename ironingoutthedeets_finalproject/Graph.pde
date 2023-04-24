@@ -32,7 +32,7 @@ class Graph {
       return;
     }
 
-    vertices.add(new Vertex(label));
+    vertices.add(new Node(label));
 
     int nVert = vertices.size();
     int[][] newAdjMat = new int[nVert][nVert];
@@ -90,7 +90,38 @@ class Graph {
     return -1;
   }
 
-  ArrayList<Vertex> get_vertices() {
+  ArrayList<Node> get_vertices() {
     return vertices;
+  }
+
+  // sets the visited flag to False for all nodes
+  void reset_visited() {
+    for (int i = 0; i <= vertices.size(); i++) {
+      this.vertices.get(i).visited = false;
+    }
+  }
+
+  void dfs(int start_index) {
+    // reset visited status
+    this.reset_visited();
+
+    // create the Stack
+    Stack theStack = new Stack();
+
+    // mark the node as visited and push it on the Stack
+    theStack.push (this.vertices.get(start_index));
+
+    // visit all the other vertices according to depth
+    while (!theStack.is_empty()) {
+
+      // get an adjacent unvisited vertex
+      int u = this.get_adj_unvisited_vertex(theStack.peek().getIndex());
+        if (u == -1) {
+        u = theStack.pop().getIndex();;
+      } else {
+        this.vertices.get(u).set_visited(true);
+          theStack.push (this.vertices.get(u));
+      }
+    }
   }
 }
