@@ -1,6 +1,5 @@
 import drop.*;
 
-
 Node n1;
 SDrop drop;
 
@@ -15,7 +14,6 @@ void draw() {
   n1.createNode();
   n1.dragNode();
 }
-
 
 void dropEvent(DropEvent theDropEvent) {
   if (theDropEvent.isFile()) {

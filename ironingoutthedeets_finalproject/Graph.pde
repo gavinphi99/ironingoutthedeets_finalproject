@@ -29,7 +29,7 @@ class Graph {
   }
 
   void add_vertex(Node node) {
-    if (has_vertex(label)) {
+    if (has_vertex(node.label)) {
       return;
     }
 
@@ -179,7 +179,7 @@ void bfs(Node start) {
   Node getNodeFromIndex(int index) {
     for (int i = 0; i < vertices.size(); i++) {
       Node currentNode = vertices.get(i);
-      if (currentNode.get(i) == index) {
+      if (currentNode.getIndex() == index) {
         return currentNode;
       }
     }
