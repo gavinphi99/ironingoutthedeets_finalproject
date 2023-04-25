@@ -3,6 +3,7 @@ class Node{
   String label;
   int index;
   boolean visited;
+  boolean overlap;
   Node(String label, int index, float x, float y, float r){
     this.x = x;
     this.y = y;
@@ -50,5 +51,10 @@ class Node{
 
      }
     }
+  }
+  
+  boolean overlap(Node other){
+    float distBtwCenters = dist(x, y, other.x, other.y);
+    return distBtwCenters <= r + other.r;
   }
 }

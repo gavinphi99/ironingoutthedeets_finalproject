@@ -28,12 +28,12 @@ class Graph {
     return -1;
   }
 
-  void add_vertex(String label) {
+  void add_vertex(Node node) {
     if (has_vertex(label)) {
       return;
     }
 
-    vertices.add(new Node(label));
+    vertices.add(node);
 
     int nVert = vertices.size();
     int[][] newAdjMat = new int[nVert][nVert];
