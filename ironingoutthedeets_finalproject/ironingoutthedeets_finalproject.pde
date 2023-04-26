@@ -7,7 +7,16 @@ MyDropListener m;
 Data data;
 Graph graph;
 
-ArrayList<Node> nodes;
+//Node[] nodes ={
+//  // this will be whatever the user inputs
+//  new Node("A", 0, width/2, height/2, 50, #C6DAE6),
+//  new Node("B", 1, 100, 100, 50,#C6DAE6),
+//};
+
+ArrayList <Node> nodes;
+
+
+//ArrayList<Node> nodes;
 
 String filename;
 
@@ -23,12 +32,15 @@ color[] darks = {#676767, #434343};
 
 void setup() {
   nodes = new ArrayList<>();
-  nodes.add(new Node("A"));
-  nodes.add(new Node("B"));
+  nodes.add(new Node("A", 0, width/2, height/2, 50, #C6DAE6));
+  nodes.add(new Node("B", 1, 100, 100, 50, #C6DAE6));
+  nodes.add(new Node("C", 2, 200, 200, 50, #C6DAE6));
+  //nodes.add(new Node("A"));
+  //nodes.add(new Node("B"));
   //body = loadFont("IBMPlexMono-Text.otf");
   //hover = loadFont("IBMPlexMono-TextItalic.otf");
   size(1500, 700);
-  w = new Workspace();
+  w = new Workspace(nodes);
 
   //b1 = new Button(width, height/2, 50, 50);
   //b1.content = "Run BFS";
@@ -44,7 +56,16 @@ void setup() {
 }
 
 void draw() {
-  
+  //for (Node node : nodes) {
+  //  node.updatePosition();
+  //  node.pulse();
+  //}
+
+  //for (Node node : nodes) {
+  //  node.drawLines(nodes);
+  //  node.createNode();
+  //}
+
   //fill(0);
   //rect(0, 0, width, height);
   //noStroke();
@@ -62,12 +83,13 @@ void draw() {
 
 
   //if (w.hasUploaded()) {
-    
-    
+
+
   //}
-  
+
   w.startScreen();
   w.work();
+  
 
   //println(w.start);
 }
@@ -85,7 +107,7 @@ void mouseClicked() {
   if (w.upload.intersect(mouseX, mouseY) && w.hasUploaded()) {
     w.startWork();
     m.mouseClicked();
-    
+
     //println(w.start);
     //println(w.work);
     //println("here");
@@ -95,6 +117,20 @@ void mouseClicked() {
   }
 
   if (w.dfs.intersect(mouseX, mouseY) && w.hasDFSPressed()) {
+  }
+}
+
+void mousePressed() {
+  for (Node node : nodes) {
+    if (node.isMouseOver()) {
+      node.startDrag();
+    }
+  }
+}
+
+void mouseReleased() {
+  for (Node node : nodes) {
+    node.stopDrag();
   }
 }
 

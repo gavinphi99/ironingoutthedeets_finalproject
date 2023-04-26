@@ -11,7 +11,7 @@ class Workspace {
   FileDrop fileDrop;
   Field viz;
 
-  Workspace() {
+  Workspace(ArrayList<Node> nodes) {
     start = 1;
     work = 0;
     dropped = 0;
@@ -71,6 +71,16 @@ class Workspace {
       dfs.hover(mouseX, mouseY);
       bfs.display();
       dfs.display();
+      visualize(nodes);
+    }
+  }
+  
+  void visualize(ArrayList<Node> nodes) {
+    for (int i = 0; i < nodes.size(); i++) {
+      nodes.get(i).updatePosition();
+      nodes.get(i).pulse();
+      nodes.get(i).drawLines(nodes);
+      nodes.get(i).createNode();
     }
   }
 

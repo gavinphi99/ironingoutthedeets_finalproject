@@ -29,8 +29,6 @@ class Data {
       graph.add_directed_edge(start, end, 1);
       
     }
-    println(graph.adjMat[0]);
-    println(num_edges);
     
   }
   
