@@ -1,29 +1,22 @@
 class Data {
-   
-  Graph g;
   
-  ArrayList<Node> nodes;
-  
-  String filename;
   String[] lines;
   
   int index;
-  int num_nodes;
   
   boolean select;
+  int num_nodes;
   
-  Data(String filename, ArrayList<Node> nodes) {
-    lines = loadStrings(filename);
-    
-    g = new Graph(nodes);
-    num_nodes = int(lines[0]);
+  Data() {
     index = 0;
     select = false;
   }
   
-  void fillGraph() {
+  void fillGraph(String filename) {
+    lines = loadStrings(filename);
+    num_nodes = int(lines[0]);
     for (int i = 1; i <= num_nodes; i++) {
-      g.add_vertex(new Node(lines[i]));
+      graph.add_vertex(new Node(lines[i]));
     }
     
     int num_edges = int(lines[num_nodes + 1]);
@@ -33,18 +26,22 @@ class Data {
       //println(edges[0]);
       int start = int(edges[0]);
       int end = int(edges[1]);
-      g.add_directed_edge(start, end, 1);
+      graph.add_directed_edge(start, end, 1);
     }
+    
+    println(num_edges);
     
   }
   
   void callDFS() {
-    g.dfs(index);
+    graph.dfs(index);
   }
   
   void callBFS() {
-    g.bfs(g.vertices.get(index));
+    graph.bfs(graph.vertices.get(index));
   }
+  
+  
   
   void keyPressed() {
     if (keyCode == RIGHT) {

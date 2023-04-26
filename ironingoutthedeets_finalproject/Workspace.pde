@@ -1,8 +1,10 @@
 class Workspace {
 
-  int start = 1;
-  int work = 0;
-  int up = 0;
+  int start;
+  int work;
+  int dropped;
+  int bfsPress;
+  int dfsPress;
   Button upload;
   Button bfs;
   Button dfs;
@@ -10,6 +12,12 @@ class Workspace {
   Field viz;
 
   Workspace() {
+    start = 1;
+    work = 0;
+    dropped = 0;
+    bfsPress = 0;
+    dfsPress = 0;
+
     upload = new Button(50, height/2 - 70, 50, 50);
     upload.content = "Upload Adjacency Matrix";
     upload.style(darks[0], lights[1]);
@@ -36,6 +44,7 @@ class Workspace {
 
   void startScreen() {
     if (start == 1) {
+
       fill(darks[1]);
       rect(0, 0, width, height);
       fileDrop.drop(mouseX, mouseY);
@@ -52,7 +61,7 @@ class Workspace {
   }
 
   void work() {
-    if (work == 1 && upload()) {
+    if (work == 1) {
       fill(darks[1]);
       noStroke();
       rect(0, 0, width, height);
@@ -65,13 +74,55 @@ class Workspace {
     }
   }
 
-  Boolean upload() {
+  void fileDropped() {
+    dropped = 1;
+  }
+
+  void bfsPressed() {
+    dfsPress = 0;
+    bfsPress = 1;
+  }
+
+  void dfsPressed() {
+    bfsPress = 0;
+    dfsPress = 1;
+  }
+
+  Boolean hasUploaded() {
     // will be used to verify file upload
-    up = 1;
-    if (up == 1) {
+    if (dropped == 1) {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Boolean hasBFSPressed() {
+    if (bfsPress == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Boolean hasDFSPressed() {
+    if (dfsPress == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void mouseClicked() {
+    if (w.upload.intersect(mouseX, mouseY) && w.hasUploaded()) {
+      w.startWork();
+      m.mouseClicked();
+      //println(w.start);
+      //println(w.work);
+      //println("here");
+    }
+
+    if (w.bfs.intersect(mouseX, mouseY) && w.hasBFSPressed()) {
     }
   }
 }

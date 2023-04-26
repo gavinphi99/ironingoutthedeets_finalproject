@@ -1,10 +1,13 @@
-Button b1;
-Workspace w;
 import drop.*;
+
+//Button b1;
+Workspace w;
 SDrop drop;
 MyDropListener m;
+Data data;
+Graph graph;
+
 ArrayList<Node> nodes;
-Data d;
 String filename;
 
 PFont h1;
@@ -22,12 +25,16 @@ void setup() {
   //hover = loadFont("IBMPlexMono-TextItalic.otf");
   size(1500, 700);
   w = new Workspace();
-  b1 = new Button(width, height/2, 50, 50);
-  b1.content = "Run BFS";
-  b1.style(darks[0], lights[1]);
-  b1.hoverStyle(accents[0], darks[1]);
+  
+  //b1 = new Button(width, height/2, 50, 50);
+  //b1.content = "Run BFS";
+  //b1.style(darks[0], lights[1]);
+  //b1.hoverStyle(accents[0], darks[1]);
+  
   drop = new SDrop(this);
   nodes = new ArrayList();
+  graph = new Graph(nodes);
+  data = new Data();
   m = new MyDropListener();
   drop.addDropListener(m);
 }
@@ -47,10 +54,11 @@ void draw() {
   //n2.dragNode();
 
   //overlaps();
-  m.draw();
-
-  //w.work();
-  //w.startScreen();
+  
+  w.startScreen();
+  w.work();
+  
+  //println(w.start);
 }
 
 //void overlaps(){
@@ -63,43 +71,19 @@ void draw() {
 //}
 
 void mouseClicked() {
-  if (w.upload.intersect(mouseX, mouseY)) {
+  if (w.upload.intersect(mouseX, mouseY) && w.hasUploaded()) {
     w.startWork();
-    d.fillGraph();
+    m.mouseClicked();
+    //println(w.start);
+    //println(w.work);
+    //println("here");
+  }
+  if (w.bfs.intersect(mouseX, mouseY) && w.hasBFSPressed()) {
   }
 }
 
-void dropEvent(DropEvent theDropEvent) {
-  //if (theDropEvent.isFile() && w.fileDrop.intersect(mouseX, mouseY)) {
-  File myFile = theDropEvent.file();
-  filename = myFile.getName();
-  d = new Data(filename, nodes);
-  w.upload();
-
-  //println("isFile ? " +myFile.isFile());
-  //}
+void keyPressed() {
+  data.keyPressed();
 }
 
-//import drop.*;
-
-//Node n1;
-//SDrop drop;
-
-//void setup() {
-//  size(400, 400);
-//  n1 = new Node("Test", 0, width/2, height/2, 50);
-//  drop = new SDrop(this);
-//}
-
-//void draw() {
-//  background (255);
-//  n1.createNode();
-//  n1.dragNode();
-//}
-
-//void dropEvent(DropEvent theDropEvent) {
-//  if (theDropEvent.isFile()) {
-//    File myFile = theDropEvent.file();
-//    println("\nisDirectory ? "+myFile.isDirectory()+"  /  isFile ? "+myFile.isFile());
-//  }
-//}
+void dropEvent(DropEvent theDropEvent) {}

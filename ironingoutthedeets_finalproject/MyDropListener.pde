@@ -1,31 +1,44 @@
 class MyDropListener extends DropListener {
-  
+
   int myColor;
-  
+
+
   MyDropListener() {
-    myColor = color(255);
-    // set a target rect for drop event.
-    setTargetRect(10,10,100,100);
+    setTargetRect(w.fileDrop.x, w.fileDrop.y, w.fileDrop.w, w.fileDrop.h);
   }
-  
+
+  // this isn't working
   void draw() {
     fill(myColor);
-    rect(10,10,100,100);
+    rect(w.fileDrop.x, w.fileDrop.y, w.fileDrop.w, w.fileDrop.h);
   }
-  
+
   // if a dragged object enters the target area.
   // dropEnter is called.
+
+  // this isn't working
   void dropEnter() {
-    myColor = color(255,0,0);
+    myColor = color(#AACB9C);
   }
-  
+
   // if a dragged object leaves the target area.
   // dropLeave is called.
+
+  // this isn't working
   void dropLeave() {
-    myColor = color(255);
+    myColor = color(200);
   }
-  
-  void dropEvent(DropEvent theEvent) {
-    println("Dropped on MyDropListener");
+
+  void dropEvent(DropEvent theDropEvent) {
+    if (theDropEvent.isFile()) {
+      File myFile = theDropEvent.file();
+      filename = myFile.getName();
+      w.fileDropped();
+      
+    }
+  }
+
+  void mouseClicked() {
+    data.fillGraph(filename);
   }
 }
