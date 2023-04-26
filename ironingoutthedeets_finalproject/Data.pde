@@ -4,6 +4,8 @@ class Data {
   
   int index;
   
+  int selectNode = 0;
+  
   boolean select;
   int num_nodes;
   
@@ -45,28 +47,19 @@ class Data {
   }
   
   void keyPressed() {
-    if (keyCode == RIGHT) {
-      if (index >= 0 && index < num_nodes) {
-        index += 1;
-      }
-      else {
-        index = 0;
-      }
-    }
-    if (keyCode == LEFT) {
-      if (index >= 0 && index < num_nodes) {
-        index -= 1;
-      }
-      else {
-        index = num_nodes - 1;
-      }
-    }
-    if (key == ' ') {
-      select = true;
-    }
-    else {
-      select = false;
-    }
+    
+    //if (keyCode == RIGHT && selectNode > 0) {
+    //  selectNode++;
+    //  graph.vertices.get(selectNode).keyPulse();
+      
+    //}
+    //else if (keyCode == LEFT && selectNode < num_nodes) {
+    //  selectNode++;
+    //  graph.vertices.get(selectNode).keyPulse();
+    //}
+    //else if (key == ' ') {
+    //  graph.vertices.get(index).keyPulse();
+    //}
   }
   
 }

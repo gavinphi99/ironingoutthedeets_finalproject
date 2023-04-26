@@ -21,6 +21,7 @@ Graph graph;
 
 ArrayList <Node> nodes;
 ArrayList <Edge> edges;
+int numNodes;
 
 
 //ArrayList<Node> nodes;
@@ -36,6 +37,9 @@ color[] accents = {#90D8BE, #587E70};
 color[] lights = {#E8E8E8, #DEDEDE};
 color[] meds = {#ADADAD, #868686};
 color[] darks = {#676767, #434343};
+
+float startX;
+float startY;
 
 void setup() {
   size(1500, 700);
@@ -70,14 +74,7 @@ void setup() {
 
 void draw() {
   int count = 0;
-  fill(0);
-  stroke(10);
-  for (Edge e : edges) {
-    println(count);
-    
-    e.updateEdge();
-    count++;
-  }
+
   //for (Node node : nodes) {
   //  node.updatePosition();
   //  node.pulse();
@@ -112,6 +109,24 @@ void draw() {
   w.startScreen();
   w.work();
 
+  fill(0);
+  stroke(10);
+
+  for (Edge e : edges) {
+    //println(count);
+    //println(e);
+    //println(e.n1.x);
+    //println(e.n2.x);
+    e.updateEdge();
+    count++;
+  }
+  for (int i = 0; i < nodes.size(); i++) {
+    if (i == selectNode) {
+      nodes.get(i).keyPulse();
+    }
+  }
+
+
 
   //println(w.start);
 }
@@ -129,6 +144,7 @@ void mouseClicked() {
   if (w.upload.intersect(mouseX, mouseY) && w.hasUploaded()) {
     w.startWork();
     m.mouseClicked();
+    numNodes = data.num_nodes;
 
     //println(w.start);
     //println(w.work);
@@ -142,19 +158,37 @@ void mouseClicked() {
   }
 }
 
+Node current;
+
 void mousePressed() {
   for (Node node : nodes) {
     if (node.isMouseOver()) {
+      current = node;
+      startX = node.x;
+      startY = node.y;
       node.startDrag();
     }
   }
 }
 
+void replaceNode() {
+  for (int i = 0; i < nodes.size(); i++) {
+    if (nodes.get(i).label.equals(current.label)) {
+      nodes.set(i, current);
+    }
+  }
+}
 void mouseReleased() {
   for (Node node : nodes) {
+    if (!current.overlap(nodes)) {
+      current.x = startX;
+      current.y = startY;
+      replaceNode();
+    }
     node.stopDrag();
   }
 }
+int selectNode = 0;
 
 void keyPressed() {
   //m key changes if the sound is muted
@@ -169,39 +203,50 @@ void keyPressed() {
       searchSelect.play();
     }
   }
-  data.keyPressed();
+
+
+  if (keyCode == RIGHT && selectNode > 0) {
+    selectNode++;
+    nodes.get(selectNode).keyPulse();
+  } else if (keyCode == LEFT && selectNode < numNodes - 1) {
+    selectNode++;
+    nodes.get(selectNode).keyPulse();
+  } else if (key == ' ') {
+    nodes.get(numNodes).keyPulse();
+  }
+  //data.keyPressed();
 }
 
 
-  //void mousePressed() {
-  //  for (int i = 0; i < numNodes; i++) {
-  //    float x = width/2 + r * cos(i * angle);
-  //    float y = height/2 + r * sin(i * angle);
-  //    if (dist(mouseX, mouseY, x, y) < 10) {
-  //      dragging = true;
-  //      offsetX = x - mouseX;
-  //      offsetY = y - mouseY;
-  //      break;
-  //    }
-  //  }
-  //}
+//void mousePressed() {
+//  for (int i = 0; i < numNodes; i++) {
+//    float x = width/2 + r * cos(i * angle);
+//    float y = height/2 + r * sin(i * angle);
+//    if (dist(mouseX, mouseY, x, y) < 10) {
+//      dragging = true;
+//      offsetX = x - mouseX;
+//      offsetY = y - mouseY;
+//      break;
+//    }
+//  }
+//}
 
-  //void mouseDragged() {
-  //  if (dragging) {
-  //    int i = (int) ((atan2(mouseY - height/2, mouseX - width/2) + angle/2) / angle);
-  //    float x = mouseX + offsetX;
-  //    float y = mouseY + offsetY;
-  //    ellipse(x, y, 20, 20);
-  //  }
-  //}
+//void mouseDragged() {
+//  if (dragging) {
+//    int i = (int) ((atan2(mouseY - height/2, mouseX - width/2) + angle/2) / angle);
+//    float x = mouseX + offsetX;
+//    float y = mouseY + offsetY;
+//    ellipse(x, y, 20, 20);
+//  }
+//}
 
-  //void mouseReleased() {
-  //  dragging = false;
-  //}
+//void mouseReleased() {
+//  dragging = false;
+//}
 
-  //void keyPressed() {
-  //  data.keyPressed();
-  //}
+//void keyPressed() {
+//  data.keyPressed();
+//}
 
-  void dropEvent(DropEvent theDropEvent) {
-  }
+void dropEvent(DropEvent theDropEvent) {
+}

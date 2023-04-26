@@ -14,7 +14,7 @@ class Node {
   boolean drag;
   boolean timer = false;
   float startTime, lightRadius;
-  float pulseSpeed = 0.3;
+  float pulseSpeed = 0.4;
   float duration = 1000;
 
   Node(String label, int index, float x, float y, float r, color c) {
@@ -73,9 +73,15 @@ class Node {
 
   //------------------------------------------------------
 
-  boolean overlap(Node other) {
-    float distBtwCenters = dist(x, y, other.x, other.y);
-    return distBtwCenters <= r + other.r;
+  boolean overlap(ArrayList<Node> nodes) {
+    for (int i = 0; i < nodes.size(); i++) {
+      Node other = nodes.get(i);
+      float distBtwCenters = dist(x, y, other.x, other.y);
+      if (distBtwCenters >= r + other.r && !other.equals(this)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void createNode() {
@@ -89,13 +95,12 @@ class Node {
     // pulsating light
     fill(168, 218, 220);
     ellipse(x, y, r, r);
-    
+
     fill(0);
     pushMatrix();  // save the current transformation matrix
     translate(x, y);  // move the origin to the point on the circle
     text(label, 0, 0);  // draw the text centered at the origin
     popMatrix();  // restore the previous transformation matrix
-    
   }
 
   boolean isMouseOver() {
@@ -116,10 +121,10 @@ class Node {
       y = mouseY;
     }
   }
-  
+
   //void showLabel(ArrayList<Node> nodes) {
   //  for (int i = 0; i < nodes.size(); i++) {
-      
+
   //  }
   //}
 
@@ -150,4 +155,21 @@ class Node {
       timer = false;
     }
   }
+
+  void keyPulse() {
+    lightRadius += pulseSpeed;
+    if (!timer) {
+      startTime = millis();
+      timer = true;
+    } else {
+      lightRadius = 0;
+      timer = false;
+    }
+    if (timer && millis() - startTime >= duration) {
+      lightRadius = 0;
+      timer = false;
+    }
+  }
+
+
 }
