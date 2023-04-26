@@ -7,7 +7,7 @@ class Graph {
 
   Graph(ArrayList<Node> vertices) {
     this.vertices = vertices;
-    adjMat = new int[0][0];
+    adjMat = new int[vertices.size()][vertices.size()];
   }
 
   //------------------------------------------------------
