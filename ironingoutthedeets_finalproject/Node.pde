@@ -9,11 +9,19 @@ class Node {
   boolean visited;
 
   boolean overlap;
+  
+  color c;
+  boolean drag;
+  boolean timer = false;
+  float startTime, lightRadius;
+  float pulseSpeed = 0.3;
+  float duration = 1000;
 
-  Node(String label, int index, float x, float y, float r) {
+  Node(String label, int index, float x, float y, float r, color c) {
     this.x = x;
     this.y = y;
     this.r = r;
+    this.c = c;
     this.label = label;
     this.visited = false;
     this.index = index;
@@ -23,7 +31,7 @@ class Node {
     this.label = label;
     this.visited = false;
     x = width / 2;
-    height = height / 2;
+    y = height / 2;
     r = 50;
     index = 0;
   }
@@ -50,14 +58,6 @@ class Node {
 
   String get_label() {
     return label;
-  }
-
-  //------------------------------------------------------
-
-  void createNode() {
-    noStroke();
-    fill(173, 202, 214);
-    ellipse(x, y, r, r);
   }
 
   //------------------------------------------------------

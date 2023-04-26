@@ -27,8 +27,9 @@ class Data {
       int start = int(edges[0]);
       int end = int(edges[1]);
       graph.add_directed_edge(start, end, 1);
+      
     }
-    
+    println(graph.adjMat[0]);
     println(num_edges);
     
   }
@@ -40,8 +41,6 @@ class Data {
   void callBFS() {
     graph.bfs(graph.vertices.get(index));
   }
-  
-  
   
   void keyPressed() {
     if (keyCode == RIGHT) {

@@ -2,7 +2,6 @@ class MyDropListener extends DropListener {
 
   int myColor;
 
-
   MyDropListener() {
     setTargetRect(w.fileDrop.x, w.fileDrop.y, w.fileDrop.w, w.fileDrop.h);
   }

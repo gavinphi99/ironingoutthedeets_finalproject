@@ -227,4 +227,22 @@ class Graph {
     }
     return -1;
   }
+
+  //------------------------------------------------------
+
+  //void create() {
+  //  for (int i = 0; i < vertices.size(); i++) {
+  //    float x = width/2  + r * cos(i * angle);
+  //    float y = height/2 + r * sin(i * angle);
+  //    vertices.get(i).displayNode(x, y);
+  //    //ellipse(x, y, 20, 20);
+  //  }
+  //}
+
+  //void update() {
+  //  for (int i = 0; i < vertices.size(); i++) {
+  //    vertices.get(i).displayNode(x, y);
+  //    //ellipse(x, y, 20, 20);
+  //  }
+  //}
 }
