@@ -39,5 +39,6 @@ class MyDropListener extends DropListener {
 
   void mouseClicked() {
     data.fillGraph(filename);
+    println(graph.vertices);
   }
 }

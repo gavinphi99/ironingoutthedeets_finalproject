@@ -72,6 +72,7 @@ class Workspace {
       bfs.display();
       dfs.display();
       visualize(nodes);
+      
     }
   }
   
@@ -79,7 +80,7 @@ class Workspace {
     for (int i = 0; i < nodes.size(); i++) {
       nodes.get(i).updatePosition();
       nodes.get(i).pulse();
-      nodes.get(i).drawLines(nodes);
+      //nodes.get(i).drawLines(nodes);
       nodes.get(i).createNode();
     }
   }

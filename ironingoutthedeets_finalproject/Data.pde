@@ -15,21 +15,25 @@ class Data {
   void fillGraph(String filename) {
     lines = loadStrings(filename);
     num_nodes = int(lines[0]);
+    
     for (int i = 1; i <= num_nodes; i++) {
-      graph.add_vertex(new Node(lines[i]));
+      
+      graph.add_vertex(new Node(lines[i], 0, random(width), random(height), 50, #C6DAE6));
     }
     
     int num_edges = int(lines[num_nodes + 1]);
     
-    for (int j = num_nodes + 2; j < (num_edges + num_nodes); j++) {
-      String[] edges = lines[j].split(" ");
+    for (int j = num_nodes + 2; j < (num_edges + num_nodes + 2); j++) {
+      String[] edgesInput = lines[j].split(" ");
       //println(edges[0]);
-      int start = int(edges[0]);
-      int end = int(edges[1]);
-      graph.add_directed_edge(start, end, 1);
+      int start = int(edgesInput[0]);
+      int end = int(edgesInput[1]);
+      //println(j);
+      //graph.add_directed_edge(start, end, 1);
+      edges.add(new Edge(nodes.get(start), nodes.get(end)));
       
     }
-    
+    //println(edges);
   }
   
   void callDFS() {

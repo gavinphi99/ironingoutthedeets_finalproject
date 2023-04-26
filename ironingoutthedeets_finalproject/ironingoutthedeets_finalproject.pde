@@ -1,4 +1,10 @@
 import drop.*;
+//put at top with global variables
+import processing.sound.*;
+//download the minim library from processing
+
+boolean isMuted;
+SoundFile arrows, searchSelect;
 
 //Button b1;
 Workspace w;
@@ -14,6 +20,7 @@ Graph graph;
 //};
 
 ArrayList <Node> nodes;
+ArrayList <Edge> edges;
 
 
 //ArrayList<Node> nodes;
@@ -31,15 +38,21 @@ color[] meds = {#ADADAD, #868686};
 color[] darks = {#676767, #434343};
 
 void setup() {
+  size(1500, 700);
   nodes = new ArrayList<>();
-  nodes.add(new Node("A", 0, width/2, height/2, 50, #C6DAE6));
-  nodes.add(new Node("B", 1, 100, 100, 50, #C6DAE6));
-  nodes.add(new Node("C", 2, 200, 200, 50, #C6DAE6));
+  edges = new ArrayList<>();
+
+  isMuted = false;
+  arrows = new SoundFile(this, "179017smartwentcodysoft-keystroke.wav");
+  searchSelect = new SoundFile(this, "571512legitcheesesoft-notifications-bell-highding.mp3");
+  //nodes.add(new Node("A", 0, width/2, height/2, 50, #C6DAE6));
+  //nodes.add(new Node("B", 1, 100, 100, 50, #C6DAE6));
+  //nodes.add(new Node("C", 1, 200, 200, 50, #C6DAE6));
   //nodes.add(new Node("A"));
   //nodes.add(new Node("B"));
   //body = loadFont("IBMPlexMono-Text.otf");
   //hover = loadFont("IBMPlexMono-TextItalic.otf");
-  size(1500, 700);
+
   w = new Workspace(nodes);
 
   //b1 = new Button(width, height/2, 50, 50);
@@ -56,6 +69,15 @@ void setup() {
 }
 
 void draw() {
+  int count = 0;
+  fill(0);
+  stroke(10);
+  for (Edge e : edges) {
+    println(count);
+    
+    e.updateEdge();
+    count++;
+  }
   //for (Node node : nodes) {
   //  node.updatePosition();
   //  node.pulse();
@@ -89,7 +111,7 @@ void draw() {
 
   w.startScreen();
   w.work();
-  
+
 
   //println(w.start);
 }
@@ -134,36 +156,52 @@ void mouseReleased() {
   }
 }
 
-
-//void mousePressed() {
-//  for (int i = 0; i < numNodes; i++) {
-//    float x = width/2 + r * cos(i * angle);
-//    float y = height/2 + r * sin(i * angle);
-//    if (dist(mouseX, mouseY, x, y) < 10) {
-//      dragging = true;
-//      offsetX = x - mouseX;
-//      offsetY = y - mouseY;
-//      break;
-//    }
-//  }
-//}
-
-//void mouseDragged() {
-//  if (dragging) {
-//    int i = (int) ((atan2(mouseY - height/2, mouseX - width/2) + angle/2) / angle);
-//    float x = mouseX + offsetX;
-//    float y = mouseY + offsetY;
-//    ellipse(x, y, 20, 20);
-//  }
-//}
-
-//void mouseReleased() {
-//  dragging = false;
-//}
-
 void keyPressed() {
+  //m key changes if the sound is muted
+  if (key == 'm' || key == 'M') {
+    isMuted = !isMuted;
+  }
+  if (!isMuted) {
+    if (key == LEFT || key == RIGHT) {
+      arrows.play();
+    }
+    if (key == 'd' || key == 'D' || key == 'b' || key == 'B') {
+      searchSelect.play();
+    }
+  }
   data.keyPressed();
 }
 
-void dropEvent(DropEvent theDropEvent) {
-}
+
+  //void mousePressed() {
+  //  for (int i = 0; i < numNodes; i++) {
+  //    float x = width/2 + r * cos(i * angle);
+  //    float y = height/2 + r * sin(i * angle);
+  //    if (dist(mouseX, mouseY, x, y) < 10) {
+  //      dragging = true;
+  //      offsetX = x - mouseX;
+  //      offsetY = y - mouseY;
+  //      break;
+  //    }
+  //  }
+  //}
+
+  //void mouseDragged() {
+  //  if (dragging) {
+  //    int i = (int) ((atan2(mouseY - height/2, mouseX - width/2) + angle/2) / angle);
+  //    float x = mouseX + offsetX;
+  //    float y = mouseY + offsetY;
+  //    ellipse(x, y, 20, 20);
+  //  }
+  //}
+
+  //void mouseReleased() {
+  //  dragging = false;
+  //}
+
+  //void keyPressed() {
+  //  data.keyPressed();
+  //}
+
+  void dropEvent(DropEvent theDropEvent) {
+  }

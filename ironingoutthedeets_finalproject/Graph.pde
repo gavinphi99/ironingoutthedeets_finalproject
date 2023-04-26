@@ -5,7 +5,12 @@ class Graph {
 
   ArrayList<Node> vertices;
 
-  Graph(ArrayList<Node> vertices) {
+  //Graph(ArrayList<Node> vertices) {
+  //  this.vertices = vertices;
+  //  adjMat = new int[vertices.size()][vertices.size()];
+  //}
+  
+    Graph(ArrayList<Node> vertices) {
     this.vertices = vertices;
     adjMat = new int[vertices.size()][vertices.size()];
   }
