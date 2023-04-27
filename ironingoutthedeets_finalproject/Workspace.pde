@@ -43,6 +43,7 @@ class Workspace {
     saveCoord.style(darks[0], lights[1]);
     saveCoord.hoverStyle(accents[0], darks[1]);
 
+    fileDrop.content = "Drop your .txt file here";
     fileDrop = new FileDrop(50, height/2, width - 100, height/2);
     fileDrop.style(darks[0], lights[1]);
     fileDrop.hoverStyle(accents[1], accents[0]);
