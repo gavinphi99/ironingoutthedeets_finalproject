@@ -57,7 +57,7 @@ void setup() {
   //body = loadFont("IBMPlexMono-Text.otf");
   //hover = loadFont("IBMPlexMono-TextItalic.otf");
 
-  w = new Workspace(nodes);
+  w = new Workspace();
 
   //b1 = new Button(width, height/2, 50, 50);
   //b1.content = "Run BFS";
@@ -204,7 +204,7 @@ void keyPressed() {
     }
   }
 
-nodes.get(data.index).selected = false;
+  nodes.get(data.index).selected = false;
   if (keyCode == RIGHT) {
       if (data.index >= 0 && data.index < data.num_nodes - 1) {
         data.index++;
@@ -221,6 +221,8 @@ nodes.get(data.index).selected = false;
      
     }
     nodes.get(data.index).selected = true;
+ }
+    
 
 
 //void mousePressed() {
