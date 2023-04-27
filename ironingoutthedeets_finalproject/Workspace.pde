@@ -43,8 +43,8 @@ class Workspace {
     saveCoord.style(darks[0], lights[1]);
     saveCoord.hoverStyle(accents[0], darks[1]);
 
-    fileDrop.content = "Drop your .txt file here";
     fileDrop = new FileDrop(50, height/2, width - 100, height/2);
+    fileDrop.content = "Drop your .txt file here";
     fileDrop.style(darks[0], lights[1]);
     fileDrop.hoverStyle(accents[1], accents[0]);
 
@@ -53,6 +53,7 @@ class Workspace {
     fw = width - width/3 - 50;
     fh = height - 100;
     viz = new Field(width/3, 50, width - width/3 - 50, height - 100);
+    viz.content = "";
     viz.style(darks[0], lights[1]);
     viz.hoverStyle(accents[1], accents[0]);
   }
