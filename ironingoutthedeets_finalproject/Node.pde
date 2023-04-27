@@ -9,8 +9,11 @@ class Node {
   boolean visited;
 
   boolean overlap;
-
-  color c;
+  
+  color off = accents[1];
+  color selected = accents[0];
+  boolean isSelected = false;
+  color c = off;
   boolean drag;
   boolean timer = false;
   float startTime, lightRadius;
@@ -88,6 +91,12 @@ class Node {
 
     noStroke();
     // displayed circle
+    if (isSelected) {
+      c = selected;
+    }
+    else {
+      c = off;
+    }
     fill(c);
     ellipse(x, y, (r + lightRadius), (r + lightRadius));
     // add text to where the value shows on it
@@ -156,18 +165,28 @@ class Node {
     }
   }
 
-  void keyPulse() {
-    lightRadius += pulseSpeed;
-    if (!timer) {
-      startTime = millis();
-      timer = true;
-    } else {
-      lightRadius = 0;
-      timer = false;
+  void select() {
+    if (!isSelected) {
+      isSelected = true;
     }
-    if (timer && millis() - startTime >= duration) {
-      lightRadius = 0;
-      timer = false;
+    //ellipse(x, y, (r + lightRadius), (r + lightRadius));
+    //lightRadius += pulseSpeed;
+    //if (!timer) {
+    //  startTime = millis();
+    //  timer = true;
+    //} else {
+    //  lightRadius = 0;
+    //  timer = false;
+    //}
+    //if (timer && millis() - startTime >= duration) {
+    //  lightRadius = 0;
+    //  timer = false;
+    //}
+  }
+  
+  void deselect() {
+    if (isSelected) {
+      isSelected = false;
     }
   }
 

@@ -5,18 +5,22 @@ class Workspace {
   int dropped;
   int bfsPress;
   int dfsPress;
+  int saveCoordPress;
+  
   Button upload;
   Button bfs;
   Button dfs;
+  Button saveCoord;
   FileDrop fileDrop;
   Field viz;
 
-  Workspace(ArrayList<Node> nodes) {
+  Workspace() {
     start = 1;
     work = 0;
     dropped = 0;
     bfsPress = 0;
     dfsPress = 0;
+    saveCoordPress = 0;
 
     upload = new Button(50, height/2 - 70, 50, 50);
     upload.content = "Upload Adjacency Matrix";
@@ -32,6 +36,11 @@ class Workspace {
     dfs.content = "Run DFS";
     dfs.style(darks[0], lights[1]);
     dfs.hoverStyle(accents[0], darks[1]);
+    
+    saveCoord = new Button(width/7, 170, 50, 50);
+    saveCoord.content = "Save Coordinates";
+    saveCoord.style(darks[0], lights[1]);
+    saveCoord.hoverStyle(accents[0], darks[1]);
 
     fileDrop = new FileDrop(50, height/2, width - 100, height/2);
     fileDrop.style(darks[0], lights[1]);
@@ -67,10 +76,15 @@ class Workspace {
       rect(0, 0, width, height);
       viz.drop(mouseX, mouseY);
       viz.display();
+      
       bfs.hover(mouseX, mouseY);
       dfs.hover(mouseX, mouseY);
+      saveCoord.hover(mouseX, mouseY);
+      
       bfs.display();
       dfs.display();
+      saveCoord.display();
+      
       visualize(nodes);
       
     }
@@ -90,13 +104,22 @@ class Workspace {
   }
 
   void bfsPressed() {
+    saveCoordPress = 0;
     dfsPress = 0;
     bfsPress = 1;
   }
 
   void dfsPressed() {
+    saveCoordPress = 0;
     bfsPress = 0;
     dfsPress = 1;
+  }
+  
+  void saveCoorPressed() {
+    saveCoordPress = 1;
+    dfsPress = 0;
+    bfsPress = 0;
+    
   }
 
   Boolean hasUploaded() {
@@ -123,17 +146,30 @@ class Workspace {
       return false;
     }
   }
-
-  void mouseClicked() {
-    if (w.upload.intersect(mouseX, mouseY) && w.hasUploaded()) {
-      w.startWork();
-      m.mouseClicked();
-      //println(w.start);
-      //println(w.work);
-      //println("here");
+  
+  Boolean hasSaveCoordPressed() {
+    if (saveCoordPress == 1) {
+      return true;
     }
-
-    if (w.bfs.intersect(mouseX, mouseY) && w.hasBFSPressed()) {
+    else {
+      return false;
     }
   }
+
+  //void mouseClicked() {
+  //  if (w.upload.intersect(mouseX, mouseY) && w.hasUploaded()) {
+  //    w.startWork();
+  //    m.mouseClicked();
+  //    //println(w.start);
+  //    //println(w.work);
+  //    //println("here");
+  //  }
+    
+  //  else if (w.saveCoord.intersect(mouseX, mouseY)) {
+  //    println("here1");
+  //    data.saveCoord();
+  //  }
+
+    //if (w.bfs.intersect(mouseX, mouseY) && w.hasBFSPressed()) {
+    //}
 }
