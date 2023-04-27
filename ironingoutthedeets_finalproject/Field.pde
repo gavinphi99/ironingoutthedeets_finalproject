@@ -4,6 +4,8 @@ class Field {
   float y;
   float w;
   float h;
+  
+  String content = "Field";
 
   // Basic styling
   color offColor = color(200);
@@ -62,12 +64,18 @@ class Field {
   }
 
   void display() {
+    float textw = textWidth(content);
+    float textsize = 18;
+    
     pushMatrix();
     translate(x, y);
     fill(buttonColor);
     strokeWeight(weight);
     stroke(strokeColor);
     rect(0, 0, w, h, 20);
+    fill(textColor);
+    textSize(textsize);
+    text(content, (w/2) - (textw/2), (h/2) - (textsize/2) - (textsize/8), w, h);
     popMatrix();
   }
 }
