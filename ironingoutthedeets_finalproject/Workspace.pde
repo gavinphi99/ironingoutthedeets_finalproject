@@ -13,6 +13,7 @@ class Workspace {
   Button saveCoord;
   FileDrop fileDrop;
   Field viz;
+  float fx, fy, fw, fh;
 
   Workspace() {
     start = 1;
@@ -46,6 +47,10 @@ class Workspace {
     fileDrop.style(darks[0], lights[1]);
     fileDrop.hoverStyle(accents[1], accents[0]);
 
+    fx = width/3;
+    fy = 50;
+    fw = width - width/3 - 50;
+    fh = height - 100;
     viz = new Field(width/3, 50, width - width/3 - 50, height - 100);
     viz.style(darks[0], lights[1]);
     viz.hoverStyle(accents[1], accents[0]);
@@ -70,32 +75,60 @@ class Workspace {
   }
 
   void work() {
+    boolean vizStarted = false;
     if (work == 1) {
       fill(darks[1]);
       noStroke();
       rect(0, 0, width, height);
       viz.drop(mouseX, mouseY);
       viz.display();
-      
       bfs.hover(mouseX, mouseY);
       dfs.hover(mouseX, mouseY);
-      saveCoord.hover(mouseX, mouseY);
-      
       bfs.display();
       dfs.display();
-      saveCoord.display();
-      
-      visualize(nodes);
+      if (!vizStarted){
+        visualize(fx, fy, fw - 50, fh - 50, nodes);
+        vizStarted = true;
+      } else {
+        updateViz(nodes);
+      }
       
     }
   }
   
-  void visualize(ArrayList<Node> nodes) {
+  void updateViz(ArrayList<Node> nodes) {
     for (int i = 0; i < nodes.size(); i++) {
       nodes.get(i).updatePosition();
       nodes.get(i).pulse();
       //nodes.get(i).drawLines(nodes);
       nodes.get(i).createNode();
+    }
+  }
+  
+  void visualize(float fx, float fy, float fw, float fh, ArrayList<Node> nodes){
+    float size = nodes.size();
+    int div = ceil(sqrt(size));
+    int dimensionX = floor(fw) / div;
+    int dimensionY = floor(fh) / div;
+    int currentNode = 0;
+    int rowCount = 0;
+    for (int i = 0; i < div; i ++){
+      rowCount = 0;
+      for (int j = 0; j < div; j ++){
+        if (currentNode <= (size - 1)){
+          Node node = nodes.get(currentNode);
+          node.x = fx + 50 + j*dimensionX;
+          node.y = fy + 100 + i*dimensionY;
+          if (rowCount%2!=0){
+            node.y -= 50;
+          }
+          node.updatePosition();
+          node.pulse();
+          node.createNode();
+          currentNode += 1;
+          rowCount ++;
+        }
+      }
     }
   }
 
