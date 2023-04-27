@@ -51,35 +51,4 @@ class Data {
   void callBFS() {
     graph.bfs(graph.vertices.get(index));
   }
-
-  void selectedPulse() {
-    //println(index);
-    for (int i = 0; i < num_nodes; i++) {
-      if (i == index) {
-        //println(nodes.get(i));
-        nodes.get(i).select();
-      }
-      else {
-        nodes.get(i).deselect();
-      }
-    }
-  }
-  
-  void keyPressed() {
-    //println(index);
-    if (keyCode == RIGHT) {
-      if (index >= 0 && index < num_nodes) {
-        index++;
-        
-      } else {
-        index = 0;
-      }
-    } else if (keyCode == LEFT) {
-      if (index > 0 && index < num_nodes) {
-        index--;
-      } else {
-        index = num_nodes - 1;
-      }
-    }
-  }
 }
