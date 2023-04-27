@@ -13,7 +13,7 @@ class Node {
   boolean overlap;
   
   color off = accents[1];
-  color selected = accents[0];
+  color on = accents[0];
 
   color c = off;
   boolean drag;
@@ -94,7 +94,7 @@ class Node {
     noStroke();
     // displayed circle
     if (selected) {
-      c = selected;
+      c = on;
     }
     else {
       c = off;
