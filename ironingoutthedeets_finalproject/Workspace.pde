@@ -135,6 +135,7 @@ class Workspace {
 
   void fileDropped() {
     dropped = 1;
+    fileDrop.content = ".txt file recieved! Click upload to continue.";
   }
 
   void bfsPressed() {
